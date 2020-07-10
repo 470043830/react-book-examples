@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 
+/**
+ * @description jQuery
+ * @export
+ * @class JqueryTest
+ * @extends {Component}
+ */
 export default class JqueryTest extends Component {
 
     componentDidMount() {
         console.log('$(".test").text(): ', $(".test-jquery-page").text());
+        $('.test-jquery-page').find('*').css({ "background-color": "red", "font-size": "12px", "padding": "5px" });
         console.log('--------------------------jQuery版本：' + $.fn.jquery);
         // this.ajaxGetReq();
         // this.jsonpReq();

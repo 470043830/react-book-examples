@@ -1,6 +1,6 @@
 # 深入 React 技术栈示例代码
 
-![](http://www.ituring.com.cn/bookcover/1898.25.big.jpg)
+![](https://xcimg.szwego.com/tempwg63_1592879562346_5145715)
 
 ## 示例说明
 

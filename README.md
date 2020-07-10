@@ -1,6 +1,6 @@
 # 深入 React 技术栈示例代码
 
-![](https://xcimg.szwego.com/tempwg63_1592879562346_5145715)
+![](https://xcimg.szwego.com/无标题.png)
 
 ## 示例说明
 
@@ -13,6 +13,7 @@
 - 第六章示例代码是 6.3 节 Redux CRUD 实战中的代码
 - 第七章示例代码是 7.2 节 React 服务端渲染的代码
 - 第八章示例代码是 8.2 节 使用 D3 绘制 UI 的柱图以及使用 React 绘制 UI 的线图
+- my-samples 自己的测试代码
 
 ## 安装依赖
 

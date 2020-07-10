@@ -4,7 +4,7 @@ import $ from 'jquery';
 export default class JqueryTest extends Component {
 
     componentDidMount() {
-        console.log('$(".test").text(): ', $(".test").text());
+        console.log('$(".test").text(): ', $(".test-jquery-page").text());
         console.log('--------------------------jQuery版本：' + $.fn.jquery);
         // this.ajaxGetReq();
         // this.jsonpReq();

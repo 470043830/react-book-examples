@@ -53,7 +53,7 @@ class App extends React.Component {
             <SelectTest />
 
           </div>
-          <VList />
+          {/* <VList /> */}
         </header>
 
       </div>

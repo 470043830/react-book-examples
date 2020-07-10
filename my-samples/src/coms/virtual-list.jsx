@@ -42,7 +42,7 @@ function rowRenderer({
 }
 
 function getItemHeight({ index }) {
-    console.log('getItemHeight: ', index);
+    // console.log('getItemHeight: ', index);
     if (index == 0) {
         return 70;
     }
@@ -69,7 +69,7 @@ function VList() {
             <AutoSizer disableHeight>
                 {({ width }) => (
                     <List
-                        ref="List"
+                        ref="List000"
                         className="test-list-box"
                         height={listHeight}
                         // overscanRowCount={overscanRowCount}

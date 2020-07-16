@@ -6,6 +6,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "mybuild": "node my-build.js",
     "test": "jest --no-watchman"
   },
   "license": "MIT",

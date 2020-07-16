@@ -36,7 +36,8 @@ export default class JqueryTest extends Component {
     }
 
     ajaxGetReq() {
-        const url = 'http://127.0.0.1:3009/api/products';
+        // const url = 'http://127.0.0.1:3009/api/products';
+        const url = 'http://162.14.18.159/static/index.html';
         this.serverRequest = $.get(url, (result) => {
             console.log('ajaxGetReq, result:', result);
         });

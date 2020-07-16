@@ -18,6 +18,7 @@ class CommentBox extends Component {
   render() {
     return (
       <div>
+        <div>777777777777999</div>
         <CommentList comment={this.state.comment} />
         <CommentForm />
       </div>

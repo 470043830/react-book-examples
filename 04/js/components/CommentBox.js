@@ -15,6 +15,27 @@ class CommentBox extends Component {
     };
   }
 
+
+
+  testfunc = store => next => action => {
+    console.log('dispatch:', action);
+    next(action);
+    console.log('finish:', action);
+    return 'action_' + action;
+  }
+
+  next(){
+    console.log('next...');
+  }
+
+  componentDidMount() {
+    const logger = store => next => action => {
+      console.log('store:', store); console.log('dispatch:', action); next(action); console.log('finish:', action);
+    };
+    console.log('componentDidMount: ', logger('store111')(this.next)('777'));
+    console.log('componentDidMount: ', this.testfunc()(this.next)('777'));
+  }
+
   render() {
     return (
       <div>

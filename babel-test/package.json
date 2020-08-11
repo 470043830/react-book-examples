@@ -1,0 +1,25 @@
+{
+  "name": "babel-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test-arrow": "babel test_arrow.js --out-file out.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "babel": {
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-syntax-class-properties": "^7.10.4",
+    "@babel/plugin-transform-arrow-functions": "^7.10.4",
+    "@babel/plugin-transform-react-jsx": "^7.10.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "shelljs": "^0.8.4"
+  }
+}

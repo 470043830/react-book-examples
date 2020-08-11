@@ -1,0 +1,193 @@
+/* eslint-disable react/no-unused-state */
+/* eslint-disable no-empty */
+/* eslint-disable react/sort-comp */
+/* eslint-disable react/jsx-indent-props */
+import Taro from '@tarojs/taro';
+import React from 'react';
+import { View, Image, Input, Button } from '@tarojs/components';
+import classNames from 'classnames';
+import  WgIcon  from '../icon';
+
+/**图片引入 */
+import rightIcon from '../../ui-images/right-icon.png';
+
+export default class WgInputCell2 extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            time: 60,
+            btnDisable: false,
+            btnVal: '发送验证码',
+        };
+    }
+
+    componentWillUnmount(){
+    }
+
+    onInput(e) {
+        let val = e.detail.value;
+        this.props.onInput(val);
+    }
+
+    clearData(){
+        this.props.onInput('');
+    }
+
+    render() {
+        let {
+            lable,
+            placeholder,
+            explanation,
+            inputType,
+            style,
+            onClick,
+            isIocn,
+            disabled,
+            maxLength,
+            imgUrl,
+            isSendCode,
+            isError,
+            isClose,
+            inputVal,
+        } = this.props;
+
+        let { btnVal, btnDisable, time } = this.state;
+
+        let _type = inputType;
+        if (inputType === 'phone') {
+            maxLength = Number(maxLength) + 4;
+            _type = 'text';
+        } else if (inputType === 'idcard') {
+            maxLength = 23;
+        }
+
+        let timeChange, rightDom;
+        let ti = time;
+        //关键在于用ti取代time进行计算和判断，因为time在render里不断刷新，但在方法中不会进行刷新
+        const clock = () => {
+            if (ti > 0) {
+                //当ti>0时执行更新方法
+                ti = ti - 1;
+                this.setState({
+                    time: ti,
+                    btnVal: ti + 's',
+                });
+            } else {
+                //当ti=0时执行终止循环方法
+                clearInterval(timeChange);
+                this.setState({
+                    btnDisable: false,
+                    time: 60,
+                    btnVal: '发送验证码',
+                });
+            }
+        };
+
+        const sendCode = () => {
+            onClick();
+            this.setState({
+                btnDisable: true,
+                btnVal: '60s',
+            });
+            //每隔一秒执行一次clock方法
+            timeChange = setInterval(clock, 1000);
+        };
+
+        let codeStyle = btnDisable ? {
+            backgroundColor:'#F2F6F8',
+            color:'#ABB6BF',
+        }:{};
+
+        let widthStyle = {
+            width: '100%',
+            flex: 1,
+        };
+
+        let inputStyle = {
+            color: isError ? 'red' : '',
+            width: '100%',
+            flex:1,
+        } ;
+
+        if (!isError){
+            if (isIocn){
+                rightDom = <Image className='wg-from-icon' src={rightIcon} onClick={!disabled && onClick}></Image>;
+            }
+            if (imgUrl){
+                rightDom = <Image className='wg-form-img' src={imgUrl} onClick={!disabled && onClick}></Image>;
+            }
+            if (isSendCode){
+                rightDom = <Button className='wg-sed-code wg-ft-30' style={codeStyle} onClick={sendCode} disabled={disabled || btnDisable}>{btnVal}</Button>;
+            }
+            if (isClose && inputVal){
+                rightDom = <WgIcon value='delete_2' size='16' color='rgba(9, 17, 28, 0.3)' onClick={!disabled && this.clearData.bind(this)}></WgIcon>;
+            }
+        }else{
+            rightDom = <WgIcon value='notice' color='red'></WgIcon>;
+        }
+
+        return (
+            <View className='wg-form wg-space-between wg-pl-32 wg-pr-32 wg-relative'>
+                <View className='wg-space-between wg-form-left' style={widthStyle}>
+                    {lable && <View className={classNames('wg-form-label', 'wg-ft-34', disabled && 'wg-text-color')}>{lable}</View>}
+                    <Input
+                        className={classNames('wg-pr-20', 'wg-form-input', 'wg-ft-34', 'wg-justify-start', disabled && 'wg-text-color')}
+                        placeholderClass='wg-placeholder-class'
+                        type={_type}
+                        maxLength={maxLength}
+                        value={inputVal}
+                        placeholder={placeholder}
+                        disabled={disabled}
+                        onInput={this.onInput.bind(this)}
+                        style={inputStyle}
+                    >
+                    </Input>
+                </View>
+
+                {
+                    !isError && explanation &&
+                    <View className={classNames('wg-form-explanation', 'wg-ft-30', disabled && 'wg-text-color')} onClick={isIocn && !disabled && onClick} style={style}>{explanation}</View>
+                }
+
+                {rightDom}
+
+            </View>
+        );
+    }
+}
+
+
+WgInputCell2.defaultProps = {
+    /**标签名 */
+    lable: '',
+    /**input的提示信息*/
+    placeholder: '请输入',
+    /**input的type */
+    inputType: 'text',
+    /**input框最大的输入长度 */
+    maxLength: 100,
+    /**input显示的文本 */
+    inputVal: null,
+    /**是否禁用input */
+    disabled: false,
+    /**获取输入的文本 */
+    onInput: () => { },
+    /**文本说明 */
+    explanation: null,
+    /**文本说明的style */
+    style: {
+        color: '#98999A',
+    },
+    /**校验格式不对的时候 */
+    isError:false,
+    /**小箭头 */
+    isIocn: false,
+    /**传进来的图片 */
+    imgUrl: null,
+    /**是否显示发送验证码按钮 */
+    isSendCode: false,
+    /**清空的icon */
+    isClose:false,
+    /**点击右侧icon或者文本 或者 btn*/
+    onClick: () => { },
+};

@@ -17,6 +17,22 @@ export default class JqueryTest extends Component {
         // this.jsonpReq();
     }
 
+    jsonReq() {
+        $.ajax({
+            type: "get",
+            async: false,
+            url: 'http://127.0.0.1:8081/',
+            dataType: "json",
+            success: function (json) {
+                console.log('jsonReq: ', json);
+            },
+            error: function () {
+                // alert('fail');
+                console.log('fail');
+            }
+        });
+    }
+
     jsonpReq() {
         $.ajax({
             type: "get",
@@ -56,6 +72,7 @@ export default class JqueryTest extends Component {
         return (
             <div className="test-jquery-page">
                 jQuery
+                <button onClick={() => this.jsonReq()}>jsonReq</button>
                 <button onClick={() => this.jsonpReq()}>jsonpReq</button>
                 <button onClick={() => this.ajaxGetReq()}>ajaxGetReq</button>
                 <button onClick={() => this.ajaxPostReq()}>ajaxPostReq</button>

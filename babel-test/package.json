@@ -5,11 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test-arrow": "babel test_arrow.js --out-file out.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf -rf out-src222 && babel src --out-dir out-src222 --copy-files"
   },
   "author": "",
   "license": "ISC",
   "babel": {
+    "plugins": [
+      "transform-class-properties",
+      "@babel/transform-react-jsx"
+    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
@@ -20,6 +25,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "rimraf": "^3.0.2",
     "shelljs": "^0.8.4"
   }
 }

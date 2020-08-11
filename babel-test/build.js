@@ -10,11 +10,11 @@ const readDir = (entry, handler) => {
         const location = path.join(entry, item);
         const info = fs.statSync(location);
         if (info.isDirectory()) {
-            console.log(`dir:${location}`, 'out-' + location);
+            console.log(`dir: ${location}`, 'out-' + location);
             createDirIfNotExists('out-' + location);
             readDir(location, handler);
         } else {
-            console.log(`file:${location}`);
+            console.log(`file: ${location}`);
             if (handler && /\.jsx?$/.test(location)){
                 let ret = handler(location);
                 // console.log(ret && ret.code);
@@ -50,17 +50,16 @@ const transformFunc = (filename) => require("@babel/core").transformFileSync(fil
 
 
 
-shell.rm('-rf', 'out-src');
-//readDir(__dirname);
-createDirIfNotExists('out-src');
-setTimeout(() => {
-    readDir('src', transformFunc);
-}, 1000);
+
 
 
 
 
 // console.log(ret1)
-console.log('\n------------------------------------------------\n')
+console.log('\n----------------------start--------------------------\n')
 // console.log(transformFunc('src/app.js').code);
+shell.rm('-rf', 'out-src');
+//readDir(__dirname);
+createDirIfNotExists('out-src');
+readDir('src', transformFunc);
 console.log('\n---------------------end---------------------------\n')

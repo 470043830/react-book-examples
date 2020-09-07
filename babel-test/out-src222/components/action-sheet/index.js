@@ -122,6 +122,7 @@ export default class WgActionSheet extends WgComponent {
   }
 
 }
+WgActionSheet.aaaaaaaaaaaaaaaaaaaaaa = 111111111111111111111111111;
 WgActionSheet.defaultProps = {
   title: '',
   cancelText: '',

@@ -10,6 +10,7 @@ import WgActionSheetHeader from './header/index';
 // import WgMask from '../mask';
 
 export default class WgActionSheet extends WgComponent {
+    static aaaaaaaaaaaaaaaaaaaaaa = 111111111111111111111111111;
     constructor(props) {
         super(props);
 

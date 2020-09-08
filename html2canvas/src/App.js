@@ -1,6 +1,6 @@
 import React from 'react';
 import html2canvas from 'html2canvas';
-import $ from 'jquery';
+// import $ from 'jquery';
 import axios from 'axios';
 import './App.css';
 
@@ -106,57 +106,100 @@ function onImgLoad(e) {
     console.log('onImgLoad...', e.currentTarget);
 }
 
+function canvasTemplate() {
+    let imgs = [
+        `https://xcimg.szwego.com/o_1ee9l1klbhg512rr1upe123jdsq2o.jpg?imageMogr2/auto-orient/thumbnail/!320x320r/quality/100/format/jpg`,
+        `https://xcimg.szwego.com/o_1ee9l1klbeo3fginsl16h1euk2n.jpg?imageMogr2/auto-orient/thumbnail/!320x320r/quality/100/format/jpg`,
+        `https://xcimg.szwego.com/o_1eh6bqla31q831nf18h01ucm1hr4i.jpg?imageMogr2/auto-orient/thumbnail/!310x310r/quality/100/format/jpg`,
+        `https://xcimg.szwego.com/o_1eh6btu979tf1e8kf7849316uin.jpg?imageMogr2/auto-orient/thumbnail/!310x310r/quality/100/format/jpg`
+    ];
+    return (
+        <div>
+            <div className="place-bar"></div>
+            <div className="place-bar"></div>
+            <div id="canvas-template-001">
+                {
+                    imgs.map((item, index) => {
+                        return <div key={item} className="img-text-item">
+                            <img src={item} width='200' height='200' alt='img' onLoad={onImgLoad} />
+                            <div>text-{index}</div>
+                        </div>;
+                    })
+                }
+            </div>
+
+            <div className="place-bar"></div>
+            <button onClick={onButtonClick}>post buttton</button>
+            <button onClick={onGetButtonClick}>get buttton</button>
+            <div className="place-bar"></div>
+
+
+        </div>
+
+    );
+}
+
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            submitLoading: false,
+            choosedName: '',
+            showCanvas: false,
+            prefix: '20200907/demo01/'
         };
         this.fileInputEl = React.createRef();
     }
+
+    componentDidMount() {
+        console.log('this.props: ', this.props, window.location.href);
+        if (window.location.href.indexOf('canvas') !== -1){
+            this.setState({
+                showCanvas: true
+            })
+        }
+    }
+
     onUploadClick = () => {
-        onBlob(this._curBlobFile, false, '20200907/demo01/');
+        onBlob(this._curBlobFile, false, this.state.prefix);
     };
 
     handleFile = (e) => {
         const files = [...e.target.files];
         console.log('handleFile: ', files);
         this._curBlobFile = files[0];
+        this.setState({
+            choosedName: this._curBlobFile.name
+        });
     };
 
+    handleChange = (e) =>  {
+        if (e.target.value){
+            this.setState({ prefix: e.target.value });
+        }
+    }
+
     render() {
-        let imgs = [
-            `https://xcimg.szwego.com/o_1ee9l1klbhg512rr1upe123jdsq2o.jpg?imageMogr2/auto-orient/thumbnail/!320x320r/quality/100/format/jpg`,
-            `https://xcimg.szwego.com/o_1ee9l1klbeo3fginsl16h1euk2n.jpg?imageMogr2/auto-orient/thumbnail/!320x320r/quality/100/format/jpg`,
-            `https://xcimg.szwego.com/o_1eh6bqla31q831nf18h01ucm1hr4i.jpg?imageMogr2/auto-orient/thumbnail/!310x310r/quality/100/format/jpg`,
-            `https://xcimg.szwego.com/o_1eh6btu979tf1e8kf7849316uin.jpg?imageMogr2/auto-orient/thumbnail/!310x310r/quality/100/format/jpg`
-        ];
+
+        const { choosedName, showCanvas } = this.state;
         return (
             <div className="App">
-                <div className="place-bar"></div>
-                <label for="avatar">Choose a profile picture:</label>
-                <input type="file" id="avatar" name="avatar"
+                <h1>上传文件到七牛</h1>
+
+                <input type="file" id="avatar" name="avatar" hidden
                     ref={this.fileInputEl}
                     onChange={this.handleFile}
                 />
-                <button onClick={this.onUploadClick}>upload file</button>
-                <div className="place-bar"></div>
-                <div className="place-bar"></div>
-                <div id="canvas-template-001">
-                    {
-                        imgs.map((item, index) => {
-                            return <div key={item} className="img-text-item">
-                                <img src={item} width='200' height='200' alt='img' onLoad={onImgLoad} />
-                                <div>text-{index}</div>
-                            </div>;
-                        })
-                    }
+                <div className="flex space-around">
+                    <input type="text" name="prefix" placeholder='input prefix' onChange={this.handleChange}/>
+                    <button onClick={() => {
+                        this.fileInputEl.current.click();		//当点击a标签的时候触发事件
+                    }}
+                    >{choosedName ? choosedName : `choose file`}</button>
+                    <button onClick={this.onUploadClick}>upload file</button>
                 </div>
 
-                <div className="place-bar"></div>
-                <button onClick={onButtonClick}>post buttton</button>
-                <button onClick={onGetButtonClick}>get buttton</button>
-                <div className="place-bar"></div>
+                {showCanvas && canvasTemplate()}
+
             </div>
         );
     }

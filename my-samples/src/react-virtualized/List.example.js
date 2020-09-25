@@ -15,7 +15,7 @@ export default class ListExample extends React.PureComponent {
         super(props, context);
 
         this.state = {
-            listHeight: 500,
+            listHeight: 588,
             listRowHeight: 50,
             overscanRowCount: 10,
             rowCount: list.size,
@@ -130,7 +130,7 @@ export default class ListExample extends React.PureComponent {
                         <div>
                             It is large-sized.
                             <br />
-              It has a 3rd row.
+                            It has a 3rd row.
                         </div>
                     );
                     break;

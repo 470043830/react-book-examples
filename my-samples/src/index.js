@@ -7,6 +7,7 @@ import Iphone8 from './iphone8';
 import InfiniteLoaderExample from './react-virtualized/InfiniteLoader.example';
 import ListExample from './react-virtualized/List.example';
 import * as serviceWorker from './serviceWorker';
+import VConsole from 'vconsole';
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -28,3 +29,5 @@ ReactDOM.render((
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+new VConsole();

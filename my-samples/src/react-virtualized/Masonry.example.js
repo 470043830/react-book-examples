@@ -17,18 +17,24 @@ export default class MasonryExample extends React.PureComponent {
 
         this._columnCount = 0;
 
+        const width = window.innerWidth;
+        const gutterSize = 6;
+        const defaultWidth = (width - gutterSize*2) / 2;
+
+        console.log('defaultWidth: ', defaultWidth, width);
+
         this._cache = new CellMeasurerCache({
             defaultHeight: 250,
-            defaultWidth: 200,
+            defaultWidth: defaultWidth,
             fixedWidth: true,
         });
 
         this.state = {
-            columnWidth: 200,
-            height: 300,
-            gutterSize: 10,
+            columnWidth: defaultWidth,
+            height: 600,
+            gutterSize: gutterSize,
             overscanByPixels: 0,
-            windowScrollerEnabled: false,
+            windowScrollerEnabled: true,
         };
 
         this._cellRenderer = this._cellRenderer.bind(this);
@@ -60,7 +66,7 @@ export default class MasonryExample extends React.PureComponent {
         }
 
         return (
-            <div>
+            <div className={styles.Page}>
                 {child}
             </div>
         );
@@ -135,6 +141,7 @@ export default class MasonryExample extends React.PureComponent {
         const { overscanByPixels } = this.state;
 
         return (
+
             <AutoSizer
                 disableHeight
                 height={height}
@@ -143,6 +150,7 @@ export default class MasonryExample extends React.PureComponent {
                 scrollTop={this._scrollTop}>
                 {this._renderMasonry}
             </AutoSizer>
+
         );
     }
 

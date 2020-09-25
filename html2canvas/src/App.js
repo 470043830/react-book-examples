@@ -5,15 +5,17 @@ import axios from 'axios';
 import './App.css';
 
 
-var _uptoken = null;
+var _uptoken = 'copy uptoken to here';
+var _app = null;
 
 
 function makeRandomName() {
-    return `jtest20200906/1/2/${Date.now()}_${parseInt(Math.random() * 1000000000000000, 0)}`;
+    return `jtest20200908/1/2/${Date.now()}_${parseInt(Math.random() * 1000000000000000, 0)}`;
 }
 
 async function getUptoken() {
-    const res = await axios.get('/service/get_qiuniu_token.jsp');
+    const host = ''; //'https://www.micbosscloud.com';
+    const res = await axios.get(host + '/service/get_qiuniu_token.jsp');
     return res.data.uptoken;
 };
 
@@ -49,6 +51,9 @@ async function onBlob(blob, retry, specificPath) {
         console.log('data: ', response.data);
         if (response.status === 200) {
             console.log('post ok, url: ', 'https://xcimg.szwego.com/' + response.data.key);
+            _app.setState({
+                postok: 'https://xcimg.szwego.com/' + response.data.key
+            });
         } else if (response.status === 401 && !retry) {
             _uptoken = await getUptoken();
             console.log('token: ', _uptoken);
@@ -97,7 +102,7 @@ async function onButtonClick(params) {
 }
 
 async function onGetButtonClick(params) {
-    const res = await axios.get('/index');
+    const res = await axios.post('https://www.micbosscloud.com/service/get_qiuniu_token.jsp');
     console.log('onGetButtonClick ', res);
     ////   "proxy": "https://www.micbosscloud.com",
 }
@@ -145,9 +150,12 @@ class App extends React.Component {
         this.state = {
             choosedName: '',
             showCanvas: false,
-            prefix: '20200907/demo01/'
+            prefix: '20200907/demo01/',
+            postok: '',
+            inputToken: _uptoken,
         };
         this.fileInputEl = React.createRef();
+        _app = this;
     }
 
     componentDidMount() {
@@ -178,13 +186,31 @@ class App extends React.Component {
         }
     }
 
-    render() {
+    onInputToken = (e) => {
+        if (e.target.value) {
+            let str = e.target.value.replace(/\\\u/g, "%u");
+            // console.log('str: ', str, unescape(str))
+            _uptoken = unescape(str); //eval("'" + e.target.value + "'");
+            console.log('onInputToken, _uptoken:', _uptoken);
+            this.setState({
+                inputToken: _uptoken
+            });
+        }
 
-        const { choosedName, showCanvas } = this.state;
+
+        // var iframe = document.getElementsByTagName("iframe")[0];
+        // var win = iframe.contentWindow;  // 通过contentWindow获取ifame子页面的window窗体对象。(不允许跨域名访问)
+        // console.log(win.document);
+    }
+
+    render() {
+        const { choosedName, showCanvas, postok, inputToken } = this.state;
+
         return (
             <div className="App">
                 <h1>上传文件到七牛</h1>
 
+                <div className="place-bar"></div>
                 <input type="file" id="avatar" name="avatar" hidden
                     ref={this.fileInputEl}
                     onChange={this.handleFile}
@@ -198,7 +224,13 @@ class App extends React.Component {
                     <button onClick={this.onUploadClick}>upload file</button>
                 </div>
 
+
                 {showCanvas && canvasTemplate()}
+                <div className="place-bar"></div>
+                <div className="place-bar">复制下面的uptoken</div>
+                <a href={postok}>{postok}</a>
+                <input className='input-width' type="text" value={inputToken} name="inputToken" placeholder='input token' onChange={this.onInputToken} />
+                <iframe width="85%" src="https://www.micbosscloud.com/service/get_qiuniu_token.jsp"></iframe>
 
             </div>
         );

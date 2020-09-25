@@ -11,6 +11,22 @@ import VList from './coms/virtual-list';
 import JqueryTest from './coms/jquery-test';
 import './App.css';
 
+//ocr
+import { createWorker } from 'tesseract.js';
+
+const worker = createWorker({
+  logger: m => console.log(m)
+});
+
+(async () => {
+  await worker.load();
+  await worker.loadLanguage('eng');
+  await worker.initialize('eng');
+  const { data: { text } } = await worker.recognize('/testocr222.png');
+  console.log('---ocr text: ', text);
+  await worker.terminate();
+})();
+
 function ListItem({ value }) { return (<li><span>{value}</span></li>); }
 function List(props) {
   console.log('List: ', props);
@@ -27,11 +43,11 @@ function List(props) {
 
 class App extends React.Component {
   componentDidMount() {
-    this.itemChange = emitter.on('ItemChange', (data) => { console.log(data); });
+    // this.itemChange = emitter.on('ItemChange', (data) => { console.log(data); });
   }
 
   componentWillUnmount() {
-    emitter.removeListener(this.itemChange);
+    // emitter.removeListener(this.itemChange);
   }
 
   render() {

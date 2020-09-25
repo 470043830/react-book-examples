@@ -20,6 +20,10 @@ gulp.task('image', () => {
     return gulp.src(['./src/image/*.*']).pipe(gulp.dest('lib/image'));
 });
 
+
+
+const prefixDir = 'webapp_' + Math.floor(Math.random() * 100000000) + '/build/';
+
 gulp.task('publish-css', () => {
     return (
         gulp
@@ -27,7 +31,7 @@ gulp.task('publish-css', () => {
             .pipe(
                 qn({
                     qiniu: qiniuImg,
-                    prefix: 'webapp000/build/static/css/',
+                    prefix: prefixDir + 'static/css/',
                 })
             )
     );
@@ -39,7 +43,7 @@ gulp.task('publish-js', () => {
             .pipe(
                 qn({
                     qiniu: qiniuImg,
-                    prefix: 'webapp000/build/static/js/',
+                    prefix: prefixDir + 'static/js/',
                 })
             )
     );
@@ -51,7 +55,7 @@ gulp.task('publish-html', () => {
             .pipe(
                 qn({
                     qiniu: qiniuImg,
-                    prefix: 'webapp000/build/',
+                    prefix: prefixDir,
                 })
             )
     );

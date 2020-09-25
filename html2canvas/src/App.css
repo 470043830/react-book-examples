@@ -76,3 +76,10 @@ button {
 .space-around{
     justify-content: space-around;
 }
+
+
+.input-width{
+    width: 80%;
+    margin: 10px;
+    padding: 5px;
+}

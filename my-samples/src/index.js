@@ -6,6 +6,7 @@ import App from './App';
 import Iphone8 from './iphone8';
 import InfiniteLoaderExample from './react-virtualized/InfiniteLoader.example';
 import ListExample from './react-virtualized/List.example';
+import MasonryExample from './react-virtualized/Masonry.example';
 import * as serviceWorker from './serviceWorker';
 import VConsole from 'vconsole';
 
@@ -22,6 +23,7 @@ ReactDOM.render((
     <Route path="/i8" component={Iphone8} />
     <Route path="/list" component={ListExample} />
     <Route path="/inf" component={InfiniteLoaderExample} />
+    <Route path="/mas" component={MasonryExample} />
   </Router>
 ), document.getElementById('root'));
 

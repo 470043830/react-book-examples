@@ -7,6 +7,7 @@ import Iphone8 from './iphone8';
 import InfiniteLoaderExample from './react-virtualized/InfiniteLoader.example';
 import ListExample from './react-virtualized/List.example';
 import MasonryExample from './react-virtualized/Masonry.example';
+import DynamicHeightList from './react-virtualized/CellMeasurer.DynamicHeightList.example'
 import * as serviceWorker from './serviceWorker';
 import VConsole from 'vconsole';
 
@@ -24,6 +25,7 @@ ReactDOM.render((
     <Route path="/list" component={ListExample} />
     <Route path="/inf" component={InfiniteLoaderExample} />
     <Route path="/mas" component={MasonryExample} />
+    <Route path="/cell" component={DynamicHeightList} />
   </Router>
 ), document.getElementById('root'));
 
@@ -33,3 +35,8 @@ ReactDOM.render((
 serviceWorker.unregister();
 
 new VConsole();
+
+setTimeout(() => {
+  console.log('window.devicePixelRatio: ', window.devicePixelRatio)
+}, 1000);
+

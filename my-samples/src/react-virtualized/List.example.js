@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Immutable from 'immutable';
 import PropTypes from 'prop-types';
 
-import { List, AutoSizer } from 'react-virtualized';
+import { List, AutoSizer, WindowScroller } from 'react-virtualized';
 import { generateRandomList } from './utils';
 import styles from './List.module.css'; //可以看出，create-react-app已经为配置好了css module，但是需要我们以.module.scss / .module.css命名。
 
@@ -44,9 +44,11 @@ export default class ListExample extends React.PureComponent {
             useDynamicRowHeight,
         } = this.state;
 
+        const width = 414;
+
         return (
             <div className={styles.Page}>
-                <AutoSizer disableHeight>
+                {/* <AutoSizer disableHeight>
                     {({ width }) => (
                         <List
                             // ref="List"
@@ -63,7 +65,35 @@ export default class ListExample extends React.PureComponent {
                             width={width}
                         />
                     )}
-                </AutoSizer>
+                </AutoSizer> */}
+                <div className={styles.tabIndexTest} tabIndex='1' onClick={(e) => { console.log('onClick: ', e);e.preventDefault();e.stopPropagation();}}>tabindex</div>
+                <WindowScroller>
+                    {({ height, isScrolling, onChildScroll, scrollTop }) => (
+                        <List
+                            className={styles.List}
+                            autoHeight
+                            height={height}
+                            isScrolling={isScrolling}
+                            onScroll={onChildScroll}
+                            scrollTop={scrollTop}
+                            overscanRowCount={overscanRowCount}
+                            noRowsRenderer={this._noRowsRenderer}
+                            rowCount={rowCount}
+                            rowHeight={
+                                useDynamicRowHeight ? this._getRowHeight : listRowHeight
+                            }
+                            rowRenderer={this._rowRenderer}
+                            scrollToIndex={scrollToIndex}
+                            width={width}
+                        />
+                    )}
+                </WindowScroller>
+                <div>111111111111</div>
+                <div>111111111111</div>
+                <div>111111111111</div>
+                <div>111111111111</div>
+                <div>111111111111</div>
+                <div>111111111111</div>
             </div>
         );
     }

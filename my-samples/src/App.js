@@ -11,7 +11,7 @@ import VList from './coms/virtual-list';
 import JqueryTest from './coms/jquery-test';
 import './App.css';
 
-//ocr
+/*//ocr
 import { createWorker } from 'tesseract.js';
 
 const worker = createWorker({
@@ -25,7 +25,7 @@ const worker = createWorker({
   const { data: { text } } = await worker.recognize('/testocr222.png');
   console.log('---ocr text: ', text);
   await worker.terminate();
-})();
+})();*/
 
 function ListItem({ value }) { return (<li><span>{value}</span></li>); }
 function List(props) {

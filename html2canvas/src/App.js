@@ -120,9 +120,11 @@ function canvasTemplate() {
     ];
     return (
         <div>
+
             <div className="place-bar"></div>
             <div className="place-bar"></div>
             <div id="canvas-template-001">
+                <div className="dasdasdas">111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</div>
                 {
                     imgs.map((item, index) => {
                         return <div key={item} className="img-text-item">
@@ -131,6 +133,7 @@ function canvasTemplate() {
                         </div>;
                     })
                 }
+
             </div>
 
             <div className="place-bar"></div>
@@ -149,7 +152,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             choosedName: '',
-            showCanvas: false,
+            showCanvas: true,
             prefix: '20200907/demo01/',
             postok: '',
             inputToken: _uptoken,

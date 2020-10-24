@@ -1,5 +1,6 @@
 import React from 'react';
 import localforage from 'localforage';
+import pako from 'pako';
 import logo from './logo.svg';
 import './App.css';
 
@@ -9,6 +10,14 @@ class App extends React.Component {
         super(props);
         this.state = {};
     }
+
+    _deflateStr = (inputStr) => {
+        return pako.deflate(inputStr, { to: 'string' });
+    };
+
+    _inflateStr = (binaryString) => {
+        return pako.inflate(binaryString, { to: 'string' });
+    };
 
     localforageExample() {
         localforage.setItem('somekey', 'some value').then(function (value) {
@@ -49,7 +58,10 @@ class App extends React.Component {
     }
 
     onbtn2 = () => {
-        console.log('onbtn2...')
+        console.log('onbtn2...');
+        let bstr = this._deflateStr('localforageExamplelocalforageExamplelocalforageExample');
+        let ostr = this._inflateStr(bstr);
+        console.log('ostr: ', ostr, bstr);
     }
 
     render(){

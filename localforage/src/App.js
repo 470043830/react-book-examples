@@ -2,7 +2,7 @@ import React from 'react';
 import localforage from 'localforage';
 import pako from 'pako';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 
 class App extends React.Component {
@@ -76,8 +76,8 @@ class App extends React.Component {
                         target="_blank"
                         rel="noopener noreferrer"
                     >Learn React</a>
-                    <button className="button111" onClick={this.onbtn1}>button1</button>
-                    <button className="button111" onClick={this.onbtn2}>button2</button>
+                    <button className="my-button my-button_btn1" onClick={this.onbtn1}>button1</button>
+                    <button className="my-button my-button_btn2" onClick={this.onbtn2}>button2</button>
                 </header>
             </div>
         );

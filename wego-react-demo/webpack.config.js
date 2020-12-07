@@ -14,8 +14,7 @@ module.exports = (env, argv) => {
     const { mode } = argv;
 
     const BUILD_PATH = path.resolve(__dirname, prod ? 'build' : 'jsxdst');
-    const HTML_PATH = path.resolve(__dirname, prod ? 'index.html' : 'index.html');
-
+    const HTML_PATH = path.resolve(__dirname, prod ? 'index.prod.html' : 'index.html');
 
     let config = {
         mode,
@@ -28,7 +27,7 @@ module.exports = (env, argv) => {
             hashDigestLength: 8, // hash、chunkhash、contenthash长度
             filename: prod ? '[name].[contenthash].js' : '[name].js',
             chunkFilename: prod ? '[name].[contenthash].js' : '[name].js',
-            publicPath: local ? '' : prod ? 'https://xcimg.szwego.com/' : 'jsxdst/',
+            publicPath: local ? '' : prod ? '//xcimg.szwego.com/' : 'jsxdst/',
         },
         module: {
             rules: [
@@ -98,16 +97,7 @@ module.exports = (env, argv) => {
         resolve: {
             extensions: ['.jsx', '.js', '.json', '.css', '.less'],
             alias: {
-                '@weui': path.resolve(__dirname, 'src/components/weui'),
-                '@native': path.resolve(__dirname, 'src/components/native'),
-                '@hoc': path.resolve(__dirname, 'src/components/hoc'),
-                '@utils': path.resolve(__dirname, 'src/utils'),
-                '@image': path.resolve(__dirname, 'src/image'),
-                '@routes': path.resolve(__dirname, 'src/routes'),
-                '@components': path.resolve(__dirname, 'src/components'),
-                '@constants': path.resolve(__dirname, 'src/constants'),
-                '@api': path.resolve(__dirname, 'src/api'),
-                '@stores': path.resolve(__dirname, 'src/stores'),
+                '@images': path.resolve(__dirname, 'src/images'),
             },
         },
 
@@ -126,7 +116,7 @@ module.exports = (env, argv) => {
                                 /[\\/]node_modules[\\/](.*?)([\\/]|$)/
                             )[1];
                             const names = packageName.split('@');
-                            return `wego~${names[names.length - 1]}`;
+                            return `wegooo~${names[names.length - 1]}`;
                         },
                         test: /[\\/]node_modules[\\/]/,
                         chunks: 'initial',
@@ -143,20 +133,13 @@ module.exports = (env, argv) => {
 
     if (local) {
         const devServer = proxy && {
-            contentBase: false,
+            // contentBase: false,
             port,
             proxy: {
-                '/': {
-                    // target: 'https://www.wemicroboss.com', // dev
-                    // target: 'http://129.204.177.247:10013/', // dev
+                '/abcd': {
                     // target: 'https://www.wegoab.com', // test
-                    // target: 'http://106.52.144.24:20080/', // test
-                    // target: 'http://134.175.224.99:10013', // test
                     target: 'https://www.micbosscloud.com/', // pre prod
-                    // target: 'http://119.29.115.172:20080', // pre prod
-                    // target: 'http://119.29.115.172:21080', // ux
                     // target: 'https://www.szwego.com', // prod
-                    // target: 'http://localhost:8080', // dev
                     secure: false, // 支持https域名
                     // logLevel: 'info',
                     changeOrigin: true,
@@ -170,30 +153,12 @@ module.exports = (env, argv) => {
         config = {
             ...config,
             devServer: {
-                // contentBase: '', // 本地服务开启目录 default: cwd
-                contentBase: path.join(__dirname, '..'),
-                publicPath: '/static/', // 静态资源目录
-                compress: true, // gzip
-                // historyApiFallback: true,
-                noInfo: false,
-                https: false, // 本地地址是否使用https
+                // contentBase: path.join(__dirname, '..'),
+                publicPath: '/', // 静态资源目录
                 host: '0.0.0.0', // 支持外网访问 default: localhost
                 useLocalIp: true, // 使用本机ip访问
-                port: 8080,
                 open: true,
-                openPage: 'static/index.html',
-                hot: true,
-                stats: {
-                    assets: true,
-                    chunks: false,
-                    colors: true,
-                    version: false,
-                    hash: true,
-                    timings: true,
-                    chunkModules: false,
-                    children: false,
-                    modules: false,
-                },
+                openPage: '#/',
                 ...devServer,
             },
         };

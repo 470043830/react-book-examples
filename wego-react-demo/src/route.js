@@ -32,7 +32,7 @@ import Album3 from './routes/album3';
 
 export const routes = [
     <Route path="/" component={Album} />,
-    <Route path="/album1" component={Album} />,
+    <Route path="/home" component={Album} />,
     <Route path="/album2" component={Album2} />,
     <Route path="/album3" component={Album3} />
 ].map((i, index) => React.cloneElement(i, { key: index }));

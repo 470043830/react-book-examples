@@ -31,16 +31,15 @@
         "axios": "^0.19.0",
         "classnames": "^2.2.5",
         "es6-promise": "^4.1.1",
-        "file-saver": "^2.0.0",
-        "md5": "^2.2.1",
         "prop-types": "^15.7.2",
-        "rc-swipeout": "2.0.11",
         "react": "^16.9.0",
         "react-dom": "^16.9.0",
+        "react-intl": "^5.10.6",
         "react-loadable": "^5.5.0",
         "react-router": "^3.0.1",
         "react-virtualized": "^9.21.0",
-        "single-spa-react": "^2.11.0"
+        "sortablejs": "^1.12.0",
+        "wego-ui-mobile": "^1.1.89"
     },
     "devDependencies": {
         "@babel/core": "^7.4.3",
@@ -54,6 +53,7 @@
         "axios-mock-adapter": "^1.17.0",
         "babel-eslint": "^10.0.1",
         "babel-loader": "^8.0.5",
+        "babel-plugin-import": "^1.13.3",
         "clean-webpack-plugin": "^2.0.1",
         "copy-webpack-plugin": "^5.0.4",
         "css-loader": "^2.1.1",

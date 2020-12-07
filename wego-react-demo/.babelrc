@@ -31,6 +31,13 @@
                 "loose": true
             }
         ],
+        [
+        "import",
+            {
+            "libraryName": "wego-ui-mobile",
+            "style": true
+            }
+        ],
         "@babel/plugin-syntax-dynamic-import",
         "@babel/plugin-transform-async-to-generator",
         "react-loadable/babel"

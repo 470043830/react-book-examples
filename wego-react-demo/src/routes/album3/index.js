@@ -22,9 +22,9 @@ export default class Index extends React.Component {
                     <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
                     <Icon key="1" type="ellipsis" />,
                 ]}
-            >Album---2</NavBar>
+            >Album---3</NavBar>
             <List renderHeader={() => 'Basic Style'} className="my-list">
-                <Item extra={'extra content'}>Title</Item>
+                <Item extra={'extra content'}>Title333</Item>
             </List>
         </div>
     }

@@ -45,10 +45,14 @@ module.exports = (env, argv) => {
                 {
                     test: /\.(c|le)ss$/,
                     use: [
-                        // prod ? MiniCssPlugin.loader : 'style-loader',
                         'style-loader',
                         'css-loader',
-                        'less-loader',
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                javascriptEnabled: true
+                            },
+                        }
                     ],
                 },
                 {

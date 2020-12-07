@@ -1,0 +1,38 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "modules": false
+            }
+        ],
+        "@babel/preset-react"
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-proposal-decorators",
+            {
+                "legacy": true
+            }
+        ],
+        [
+            "@babel/transform-runtime",
+            {
+              "absoluteRuntime": false,
+              "corejs": false,
+              "helpers": false,
+              "regenerator": true,
+              "useESModules": false
+            }
+        ],
+        [
+            "@babel/plugin-proposal-class-properties",
+            {
+                "loose": true
+            }
+        ],
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-transform-async-to-generator",
+        "react-loadable/babel"
+    ]
+}

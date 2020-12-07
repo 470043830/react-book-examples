@@ -1,6 +1,7 @@
 import React from "react";
 import { Router, hashHistory } from "react-router";
 import { routes } from "./src/route";
+import './app.less';
 
 const routeArr = [...routes];
 

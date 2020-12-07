@@ -9,9 +9,11 @@ export default class Album extends React.Component {
     }
 
     render() {
+        const style ={
+            minHeight: document.documentElement.clientHeight + 'px'
+        }
         return (
-            <>
-
+            <div className='page-1' style={style}>
                 <NavBar
                     mode="dark"
                     icon={<Icon type="left" />}
@@ -21,8 +23,6 @@ export default class Album extends React.Component {
                         <Icon key="1" type="ellipsis" />,
                     ]}
                 >NavBar</NavBar>
-
-
                 <WingBlank>
                     <WhiteSpace size="xl" />
                     <Card>
@@ -41,12 +41,23 @@ export default class Album extends React.Component {
                         <Card.Footer content="footer content" extra={<div>extra footer content</div>} />
                     </Card>
 
+                    {
+                        [].map(e => {
+                            return <>
+                                <WhiteSpace size="xl" />
+                                <Button type='primary' onClick={this.gotoPage2}>
+                                    to 2</Button>
+                            </>
+                        })
+                    }
+
                     <WhiteSpace size="xl" />
                     <Button type='primary' onClick={this.gotoPage2}>
                         to 2
                     </Button>
+
                 </WingBlank>
-            </>
+            </div>
         );
     }
 }

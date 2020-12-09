@@ -9,7 +9,7 @@ function PageLoading() {
     return <div>AsyncLoader...</div>;
 }
 
-function AsyncLoader(props) {
+export function AsyncLoader(props) {
     const obj = {
         loading: PageLoading,
         // delay: 200,

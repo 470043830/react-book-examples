@@ -1,15 +1,17 @@
 import React from "react";
 import { Router, hashHistory } from "react-router";
-import VConsole from 'vconsole';
-import { routes } from "./src/route";
+import { routes, AsyncLoader } from "./src/route";
 import './app.less';
 
 const routeArr = [...routes];
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            isConsole: false
+        };
     }
 
     hashchange = (e) => {
@@ -39,12 +41,17 @@ class App extends React.Component {
 
     componentDidMount() {
         this.setTtile(window.location.href);
-        this.vConsole = new VConsole();
+
         // 监听路由变化
         window.addEventListener("hashchange", this.hashchange, false);
+
+        if (window.location.search.indexOf('vconsole=open') != -1){
+            this.setState({ isConsole: true });
+        }
     }
 
     render() {
+        const { isConsole } = this.state;
         return (
             <>
                 <Router history={hashHistory}>{routeArr}</Router>

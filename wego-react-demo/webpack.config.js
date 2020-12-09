@@ -4,8 +4,17 @@ const CleanPlugin = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const QiniuPlugin = require('qiniu-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const port = 8082;
+const port = 5555;
+
+const CSSPlugin = new ExtractTextPlugin({
+    filename: '[name].css',
+    // allChunks: true,
+    ignoreOrder: true
+});
 
 
 module.exports = (env, argv) => {
@@ -41,6 +50,20 @@ module.exports = (env, argv) => {
                         },
                     },
                 },
+
+                // {
+                //     test: /\.(c|le)ss$/,
+                //     use: [
+                //         MiniCssExtractPlugin.loader,
+                //         'css-loader',
+                //         {
+                //             loader: 'less-loader',
+                //             options: {
+                //                 javascriptEnabled: true
+                //             },
+                //         }
+                //     ],
+                // },
                 {
                     test: /\.(c|le)ss$/,
                     use: [
@@ -64,6 +87,7 @@ module.exports = (env, argv) => {
                         },
                     },
                 },
+
             ],
         },
         plugins: [
@@ -78,10 +102,10 @@ module.exports = (env, argv) => {
                 bucket: 'lookbook-server-img',
                 path: '',
             }),
-            new webpack.optimize.LimitChunkCountPlugin({
-                maxChunks: 200, // Must be greater than or equal to one
-                minChunkSize: 10240,
-            }),
+            // new webpack.optimize.LimitChunkCountPlugin({
+            //     maxChunks: 200, // Must be greater than or equal to one
+            //     minChunkSize: 10240,
+            // }),
             local &&
             new CopyWebpackPlugin([
                 {
@@ -93,6 +117,12 @@ module.exports = (env, argv) => {
             //     analyzerHost: '127.0.0.1',
             //     analyzerPort: 7878, // 运行后的端口号
             // }),
+            // CSSPlugin,
+            // new MiniCssExtractPlugin({
+            //     filename: '[name].[contenthash].css',
+            //     chunkFilename: '[id].[contenthash].css'
+            // })
+
         ].filter(Boolean),
         resolve: {
             extensions: ['.jsx', '.js', '.json', '.css', '.less'],

@@ -58,7 +58,7 @@ export default class Album extends React.Component {
     };
 
     gotoPage2() {
-        // window.location.hash = "/album2";
+        window.location.hash = "/album2";
         // import('jquery').then(m => { console.log('$: ', m); });
 
         // Promise.all([import('vconsole'), import('jquery')]).then(libs => {
@@ -66,10 +66,10 @@ export default class Album extends React.Component {
         //     var $ = libs[1];
         //     window._vconsole = new v.default();
         // });
-        Promise.all([import('vconsole')]).then(libs => {
-            var v = libs[0];
-            window._vconsole = new v.default();
-        });
+        // Promise.all([import('vconsole')]).then(libs => {
+        //     var v = libs[0];
+        //     window._vconsole = new v.default();
+        // });
 
     }
 

@@ -78,6 +78,10 @@ module.exports = (env, argv) => {
                     ],
                 },
                 {
+                    test: /\.scss$/,
+                    loaders: ['style-loader', 'css-loader', 'sass-loader']
+                },
+                {
                     test: /\.(png|jpg|jpeg|gif|svg)$/,
                     use: {
                         loader: 'url-loader',
